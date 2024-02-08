@@ -50,11 +50,23 @@ import { useChat } from 'ai/react';
 
 export default function Chat() {
     const { messages, input, handleInputChange, handleSubmit } = useChat();
+    const EnterPress = (e: any) => {
+        if (e.keyCode == 13 && e.shiftKey == false) {
+            e.preventDefault();
+            console.log('pressed enter');
+            console.log(input);
+
+            if (input && input.trim() !== '') {
+                handleSubmit(e);
+            }
+
+        }
+    }
     return (
         <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-            <div className=''>
+            <div className='h-full w-full p-7 m-8 mb-32'>
                 {messages.map(m => (
-                    <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-4 m-4 rounded-lg">
+                    <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-4 m-4 rounded-lg z-0">
                         <h1 className='font-bold text-rose-900'>{m.role === 'user' ? 'User: ' : 'AI: '}</h1>
                         <p>{m.content}</p>
                     </div>
@@ -64,11 +76,14 @@ export default function Chat() {
 
             <form onSubmit={handleSubmit}>
                 <textarea
-                    className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl min-h-12"
+                    className="z-50 fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl min-h-12"
                     value={input}
                     placeholder="let's chat..."
                     onChange={handleInputChange}
+                    rows={5}
+                    onKeyDown={EnterPress}
                 />
+                <div className='fixed bottom-0 w-full bg-white z-30 h-28'></div>
             </form>
         </div>
     );
