@@ -9,16 +9,17 @@ export async function callOpenAI(inputString: string) {
     console.log();
 
 
-    const completion = await openai.chat.completions.create({
+    const stream = await openai.chat.completions.create({
         messages: [{ role: "system", content: inputString }],
         model: "gpt-4-turbo-preview",
+        stream: true,
     });
 
-    console.log(completion);
-    console.log(completion['choices'][0]['message']['content']);
+    // for await (const part of stream) {
+    //     console.log(part.choices[0]?.delta?.content || '');
+    // }
 
-
-    return completion['choices'][0]['message']['content']
+    return stream
 }
 
 // 

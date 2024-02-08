@@ -1,76 +1,72 @@
-'use client'
-import { useState } from "react";
-import { callOpenAI } from "./api/openAI";
+// 'use client'
+// import { useState } from "react";
+// // import OutputArea from "@/component/OutputArea/OutputArea";
+// import { useChat } from 'ai/react';
 
-export default function Home() {
+// export default function Home() {
 
-  type chatItem = {
-    text: String | null
-    color: String
-  }
+//     const { messages, input, handleInputChange, handleSubmit } = useChat();
 
-  const [inputValue, setIputValue] = useState('')
-
-  const [chatHistory, setChatHistory] = useState<chatItem[]>([])
-
-  const [disabled, setDisabled] = useState(false)
-
-  const inputMethod = (val: any) => {
-    setIputValue(val)
-  }
-
-  const calculateBg = (item: chatItem) => {
-    const defaultVal = 'p-5	py-8 m-3'
-    if (item.color === "green") {
-      return 'bg-lime-400' + defaultVal
-    }
-    // return "bg-[url('https://img.umatech.work/1330650.png')]"
-    return 'bg-cyan-400' + defaultVal
-  }
-
-
-  const onclick = async () => {
-    setDisabled(true)
-    setIputValue(inputValue.trim())
-    if (!inputValue.trim()) {
-      console.log('nothing here');
-
-      return
-    }
-    console.log('click');
-    const res: chatItem = {
-      text: inputValue,
-      color: 'blue'
-    }
-    setChatHistory((chatHistory) => [...chatHistory, res])
-    setIputValue('')
-    const outputText = await callOpenAI(inputValue)
-    const outputObj: chatItem = {
-      text: outputText,
-      color: 'green'
-    }
-    setChatHistory((chatHistory) => [...chatHistory, outputObj])
-    setDisabled(false)
-  }
+//     const [disabled, setDisabled] = useState(false)
 
 
 
-  return (
-    <main>
-      <div className="border border-l-2">
-        <h1>Hello, welcome for using!</h1>
-      </div>
+//     const onclick = async () => {
 
-      <div className="md:container px-4 " >
-        <div className="box-content min-h-96 w-full m-2 border-orange-500 border border-spacing-4 py-3">
-          {chatHistory.map((item: chatItem, i: number) => { return <div className={calculateBg(item)} key={i}>{item.text}</div> })}
+//     }
+
+
+
+//     return (
+//         <main>
+//             <div className="border border-l-2">
+//                 <h1>Hello, welcome for using!</h1>
+//             </div>
+
+//             <div className="md:container px-4 " >
+//                 {/* <OutputArea inputText={passInput} /> */}
+//                 {messages.map(m => (
+//                     <div key={m.id} className="whitespace-pre-wrap">
+//                         {m.role === 'user' ? 'User: ' : 'AI: '}
+//                         {m.content}
+//                     </div>
+//                 ))}
+//                 <div className="min-h-24 w-full m-2 border-amber-800 border border-spacing-4 py-3">
+//                     <textarea value={input} onInput={() => { handleInputChange }} name="inputArea" className="border border-spacing-1 w-full"></textarea>
+//                     <button disabled={disabled} onClick={() => handleSubmit} className="">send</button>
+//                 </div>
+//             </div>
+
+//         </main>
+//     );
+// }
+
+
+
+
+'use client';
+
+import { useChat } from 'ai/react';
+
+export default function Chat() {
+    const { messages, input, handleInputChange, handleSubmit } = useChat();
+    return (
+        <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
+            {messages.map(m => (
+                <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-3 m-2 rounded">
+                    {m.role === 'user' ? 'User: ' : 'AI: '}
+                    {m.content}
+                </div>
+            ))}
+
+            <form onSubmit={handleSubmit}>
+                <input
+                    className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+                    value={input}
+                    placeholder="Say something..."
+                    onChange={handleInputChange}
+                />
+            </form>
         </div>
-        <div className="min-h-24 w-full m-2 border-amber-800 border border-spacing-4 py-3">
-          <textarea value={inputValue} onInput={(val: any) => inputMethod(val.target.value)} name="inputArea" className="border border-spacing-1 w-full"></textarea>
-          <button disabled={disabled} onClick={() => onclick()} className="">send</button>
-        </div>
-      </div>
-
-    </main>
-  );
+    );
 }
