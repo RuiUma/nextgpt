@@ -52,18 +52,21 @@ export default function Chat() {
     const { messages, input, handleInputChange, handleSubmit } = useChat();
     return (
         <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-            {messages.map(m => (
-                <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-3 m-2 rounded">
-                    {m.role === 'user' ? 'User: ' : 'AI: '}
-                    {m.content}
-                </div>
-            ))}
+            <div className=''>
+                {messages.map(m => (
+                    <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-4 m-4 rounded-lg">
+                        <h1 className='font-bold text-rose-900'>{m.role === 'user' ? 'User: ' : 'AI: '}</h1>
+                        <p>{m.content}</p>
+                    </div>
+                ))}
+            </div>
+
 
             <form onSubmit={handleSubmit}>
-                <input
-                    className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+                <textarea
+                    className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl min-h-12"
                     value={input}
-                    placeholder="Say something..."
+                    placeholder="let's chat..."
                     onChange={handleInputChange}
                 />
             </form>
