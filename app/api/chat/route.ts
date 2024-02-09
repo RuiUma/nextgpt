@@ -19,11 +19,9 @@ export async function POST(req: Request) {
     const userEmail = headersList.get(USER_EMAIL_ADDRESS_HEADER)
 
     logger.info('header log start')
-    let n = 1
-    headersList.forEach(header => {
-        logger.info('header ' + n)
-        logger.info(header)
-        n = n + 1
+    headersList.forEach((value, key, obj) => {
+        logger.info(key + ': ' + value)
+        logger.info(obj)
     })
 
 
