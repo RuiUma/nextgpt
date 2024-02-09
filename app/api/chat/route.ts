@@ -18,6 +18,11 @@ export async function POST(req: Request) {
     const headersList = headers()
     const userEmail = headersList.get(USER_EMAIL_ADDRESS_HEADER)
 
+    headersList.forEach(header => {
+        logger.info(header)
+    })
+
+
     logger.info('User Email');
 
     logger.info(userEmail)
