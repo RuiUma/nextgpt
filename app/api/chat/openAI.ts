@@ -1,13 +1,12 @@
 'use server'
 import OpenAI from "openai";
 
+
+
+
 export async function callOpenAI(inputString: string) {
+
     const openai = new OpenAI();
-    console.log('server function called');
-
-    console.log(inputString);
-    console.log();
-
 
     const stream = await openai.chat.completions.create({
         messages: [{ role: "system", content: inputString }],
