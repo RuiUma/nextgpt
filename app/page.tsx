@@ -47,9 +47,40 @@
 'use client';
 
 import { useChat } from 'ai/react';
+import { useEffect, useState } from 'react';
 
 export default function Chat() {
     const { messages, input, handleInputChange, handleSubmit } = useChat();
+
+
+    const getUserInfo = () => {
+        return fetch('/api/access', {
+            method: 'GET'
+        })
+    }
+
+    const [userEmail, setUserEmail] = useState('')
+    const [userJWT, setUserJWT] = useState('')
+
+    useEffect(() => {
+        getUserInfo().then((res) => {
+            console.log('get user info called');
+
+            console.log(res);
+
+            const { userEmail, jwt }: any = res
+            console.log(userEmail);
+            console.log(jwt);
+
+
+            setUserEmail(userEmail)
+            setUserJWT(jwt)
+
+
+        })
+
+    })
+
     const EnterPress = (e: any) => {
         if (e.keyCode == 13 && e.shiftKey == false) {
             e.preventDefault();
@@ -67,7 +98,7 @@ export default function Chat() {
             <div className='h-full w-full p-7 m-8 mb-32'>
                 {messages.map(m => (
                     <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-4 m-4 rounded-lg z-0">
-                        <h1 className='font-bold text-rose-900'>{m.role === 'user' ? 'User: ' : 'AI: '}</h1>
+                        <h1 className='font-bold text-rose-900'>{m.role === 'user' ? 'User: ' : 'GPT: '}</h1>
                         <p>{m.content}</p>
                     </div>
                 ))}
