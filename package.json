@@ -28,10 +28,5 @@
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
-  },
-  "browser": {
-    "net": false,
-    "tls": false,
-    "crypto": false
   }
 }
