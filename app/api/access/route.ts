@@ -31,8 +31,12 @@ export async function GET() {
     const redisJWT = await redisClient.get(CF_JWT_HEADER)
 
     if (redisEmail !== userEmail || redisJWT !== jwt) {
+        logger.info('redis update')
         await redisClient.set(USER_EMAIL_ADDRESS_HEADER, userEmail || '')
         await redisClient.set(CF_JWT_HEADER, jwt || '')
+    } else {
+        logger.info('redis up to date')
+
     }
 
     const response = {
