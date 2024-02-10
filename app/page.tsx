@@ -53,35 +53,12 @@ export default function Chat() {
     const { messages, input, handleInputChange, handleSubmit } = useChat();
 
 
-    const getUserInfo = () => {
-        return fetch('/api/access', {
-            method: 'GET'
-        })
-    }
-
-    const [userEmail, setUserEmail] = useState('')
-    const [userJWT, setUserJWT] = useState('')
-
+    const [userName, setUserName] = useState('')
     useEffect(() => {
-        getUserInfo().then((res => res.json())).then((data) => {
-
-
-            console.log('get user info called');
-
-            console.log(data);
-
-            const { userEmail, jwt }: any = data
-            console.log(userEmail);
-            console.log(jwt);
-
-
-            setUserEmail(userEmail)
-            setUserJWT(jwt)
-
-
-        })
-
+        setUserName(localStorage.getItem('userName') || 'User')
     })
+
+
 
     const EnterPress = (e: any) => {
         if (e.keyCode == 13 && e.shiftKey == false) {
@@ -100,7 +77,7 @@ export default function Chat() {
             <div className='h-full w-full p-7 m-8 mb-32'>
                 {messages.map(m => (
                     <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-4 m-4 rounded-lg z-0">
-                        <h1 className='font-bold text-rose-900'>{m.role === 'user' ? 'User: ' : 'GPT: '}</h1>
+                        <h1 className='font-bold text-rose-900'>{m.role === 'user' ? userName + ': ' : 'GPT: '}</h1>
                         <p>{m.content}</p>
                     </div>
                 ))}
