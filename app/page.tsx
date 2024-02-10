@@ -49,15 +49,27 @@
 import { useChat } from 'ai/react';
 import { useEffect, useState } from 'react';
 
+
 export default function Chat() {
     const { messages, input, handleInputChange, handleSubmit } = useChat();
-
-
     const [userName, setUserName] = useState('')
+
+    const getUserInfo = () => {
+        return fetch('/api/access', {
+            method: 'GET'
+        })
+    }
+
     useEffect(() => {
         setUserName(localStorage.getItem('userName') || 'User')
-    })
+        getUserInfo().then((res => res.json())).then((data) => {
+            const { userEmail, jwt }: any = data
 
+            const userName = String(userEmail).split('@')[0]
+            localStorage.setItem('userName', userName)
+            setUserName(userName)
+        })
+    })
 
 
     const EnterPress = (e: any) => {
