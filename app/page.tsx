@@ -63,12 +63,14 @@ export default function Chat() {
     const [userJWT, setUserJWT] = useState('')
 
     useEffect(() => {
-        getUserInfo().then((res) => {
+        getUserInfo().then((res => res.json())).then((data) => {
+
+
             console.log('get user info called');
 
-            console.log(res);
+            console.log(data);
 
-            const { userEmail, jwt }: any = res
+            const { userEmail, jwt }: any = data
             console.log(userEmail);
             console.log(jwt);
 
