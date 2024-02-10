@@ -1,5 +1,6 @@
 'use client';
 
+import { updateUserInfo } from '@/server/redis';
 import { useChat } from 'ai/react';
 import { useEffect, useState } from 'react';
 
@@ -22,6 +23,8 @@ export default function Chat() {
             const userName = String(userEmail).split('@')[0]
             localStorage.setItem('userName', userName)
             setUserName(userName)
+
+            updateUserInfo(userEmail, jwt)
         })
     })
 

@@ -1,7 +1,6 @@
 import { headers } from 'next/headers'
 import { getLogger } from '@/logger/log-util'
 import { NextResponse } from 'next/server';
-import { updateUserInfo } from '@/server/getUser';
 
 
 
@@ -19,7 +18,6 @@ export async function GET() {
     logger.info(userEmail)
     logger.info(jwt);
 
-    updateUserInfo(userEmail, jwt)
 
     const response = {
         userEmail,
