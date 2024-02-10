@@ -26,6 +26,7 @@ export const updateUserInfo = async (userEmail: string | null, jwt: string | nul
         logger.info('redis up to date')
 
     }
+    await redisClient.shutdown()
 }
 
 
