@@ -3,9 +3,6 @@ import { createClient } from 'redis';
 import { getLogger } from '@/logger/log-util'
 
 
-const USER_EMAIL_ADDRESS_HEADER = 'Cf-Access-Authenticated-User-Email'
-const CF_JWT_HEADER = 'cf-access-jwt-assertion'
-
 const logger = getLogger("Chat Server Backend");
 
 
@@ -20,13 +17,11 @@ export const updateUserInfo = async (userEmail: string | null, jwt: string | nul
         }
     });
     await redisClient.connect()
-    const redisEmail = await redisClient.get(USER_EMAIL_ADDRESS_HEADER)
-    const redisJWT = await redisClient.get(CF_JWT_HEADER)
+    const redisJWT = await redisClient.get(userEmail || '')
 
-    if (redisEmail !== userEmail || redisJWT !== jwt) {
+    if (redisJWT !== jwt) {
         logger.info('redis update')
-        await redisClient.set(USER_EMAIL_ADDRESS_HEADER, userEmail || '')
-        await redisClient.set(CF_JWT_HEADER, jwt || '')
+        await redisClient.set(userEmail || '', jwt || '')
     } else {
         logger.info('redis up to date')
 
