@@ -19,6 +19,7 @@ export const updateUserInfo = async (userEmail: string | null, jwt: string | nul
             port: 15912
         }
     });
+    await redisClient.connect()
     const redisEmail = await redisClient.get(USER_EMAIL_ADDRESS_HEADER)
     const redisJWT = await redisClient.get(CF_JWT_HEADER)
 
