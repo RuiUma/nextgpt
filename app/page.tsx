@@ -24,7 +24,7 @@ export default function Chat() {
             localStorage.setItem('userName', userName)
             setUserName(userName)
 
-            // updateUserInfo(userEmail, jwt)
+            updateUserInfo(userEmail, jwt)
         })
     })
 
