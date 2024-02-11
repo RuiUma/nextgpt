@@ -1,6 +1,7 @@
 'use server'
 import { createClient } from 'redis';
 import { getLogger } from '@/logger/log-util'
+import connectToRedis from '@/redis/connectToRedis'
 
 
 const logger = getLogger("Chat Server Backend");
@@ -9,14 +10,7 @@ const logger = getLogger("Chat Server Backend");
 
 export const updateUserInfo = async (userEmail: string | null, jwt: string | null) => {
 
-    const redisClient = await createClient({
-        password: 'XnchlcTBWoleK3oMQ2On6CsLRthGNWLr',
-        socket: {
-            host: 'redis-15912.c323.us-east-1-2.ec2.cloud.redislabs.com',
-            port: 15912
-        }
-    });
-    await redisClient.connect()
+    const redisClient = await connectToRedis()
     const redisJWT = await redisClient.get(userEmail || '')
 
     if (redisJWT !== jwt) {
@@ -26,7 +20,6 @@ export const updateUserInfo = async (userEmail: string | null, jwt: string | nul
         logger.info('redis up to date')
 
     }
-    await redisClient.shutdown()
 }
 
 
