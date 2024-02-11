@@ -3,11 +3,14 @@
 import { updateUserInfo } from '@/server/redis';
 import { useChat } from 'ai/react';
 import { useEffect, useState } from 'react';
+import { remark } from 'remark';
+import html from 'remark-html';
 
 
 export default function Chat() {
     const { messages, input, handleInputChange, handleSubmit } = useChat();
     const [userName, setUserName] = useState('')
+
 
     const getUserInfo = () => {
         return fetch('/api/access', {
@@ -16,17 +19,28 @@ export default function Chat() {
     }
 
     useEffect(() => {
-        setUserName(localStorage.getItem('userName') || 'User')
-        getUserInfo().then((res => res.json())).then((data) => {
-            const { userEmail, jwt }: any = data
+        // convertMDtoHTML()
+        // setUserName(localStorage.getItem('userName') || 'User')
+        // getUserInfo().then((res => res.json())).then((data) => {
+        //     const { userEmail, jwt }: any = data
 
-            const userName = String(userEmail).split('@')[0]
-            localStorage.setItem('userName', userName)
-            setUserName(userName)
+        //     const userName = String(userEmail).split('@')[0]
+        //     localStorage.setItem('userName', userName)
+        //     setUserName(userName)
 
-            updateUserInfo(userEmail, jwt)
-        })
+        //     updateUserInfo(userEmail, jwt)
+        // })
     })
+
+    const convertMDtoHTML = (mdText: string) => {
+
+        const res = remark()
+            .use(html)
+            .processSync(mdText).toString()
+
+        return <div dangerouslySetInnerHTML={{ __html: res }}></div>
+
+    }
 
 
     const EnterPress = (e: any) => {
@@ -47,7 +61,8 @@ export default function Chat() {
                 {messages.map(m => (
                     <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-4 m-4 rounded-lg z-0">
                         <h1 className='font-bold text-rose-900'>{m.role === 'user' ? userName + ': ' : 'GPT: '}</h1>
-                        <p>{m.content}</p>
+                        {/* <p>{m.content}</p> */}
+                        {convertMDtoHTML(m.content)}
                     </div>
                 ))}
             </div>
