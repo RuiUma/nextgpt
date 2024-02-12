@@ -19,17 +19,16 @@ export default function Chat() {
     }
 
     useEffect(() => {
-        // convertMDtoHTML()
-        // setUserName(localStorage.getItem('userName') || 'User')
-        // getUserInfo().then((res => res.json())).then((data) => {
-        //     const { userEmail, jwt }: any = data
+        setUserName(localStorage.getItem('userName') || 'User')
+        getUserInfo().then((res => res.json())).then((data) => {
+            const { userEmail, jwt }: any = data
 
-        //     const userName = String(userEmail).split('@')[0]
-        //     localStorage.setItem('userName', userName)
-        //     setUserName(userName)
+            const userName = String(userEmail).split('@')[0]
+            localStorage.setItem('userName', userName)
+            setUserName(userName)
 
-        //     updateUserInfo(userEmail, jwt)
-        // })
+            updateUserInfo(userEmail, jwt)
+        })
     })
 
     const convertMDtoHTML = (mdText: string) => {
