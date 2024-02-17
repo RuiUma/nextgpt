@@ -35,61 +35,61 @@ export default function ChatUI() {
                                 of the day.
                             </p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">Bot</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">Bot 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                     <div className="flex flex-col items-start gap-1">
                         <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
                             <p>Thank you for your help!</p>
                         </div>
-                        <div className="text-sm text-gray-500 dark:text-gray-400">You</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">You 2:31 PM</div>
                     </div>
                 </div>
             </div>
