@@ -31,7 +31,7 @@ export function ChatUI() {
           <div className="flex flex-col items-end gap-1">
             <div className="rounded-lg p-4 bg-gray-100 dark:bg-gray-900">
               <p>
-                I've found the details. Your package is currently in transit and is expected to be delivered by the end
+                I&apos;ve found the details. Your package is currently in transit and is expected to be delivered by the end
                 of the day.
               </p>
             </div>
