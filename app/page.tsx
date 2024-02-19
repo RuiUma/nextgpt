@@ -1,17 +1,16 @@
 'use client';
-
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import ChatBox from '@/components/component/chat-box';
 import { updateUserInfo } from '@/server/redis';
 import { useChat } from 'ai/react';
 import { useEffect, useState } from 'react';
-import { remark } from 'remark';
-import html from 'remark-html';
+
 
 
 export default function Chat() {
     const { messages, input, handleInputChange, handleSubmit } = useChat();
     const [userName, setUserName] = useState('')
-
-
     const getUserInfo = () => {
         return fetch('/api/access', {
             method: 'GET'
@@ -31,16 +30,6 @@ export default function Chat() {
         })
     })
 
-    const convertMDtoHTML = (mdText: string) => {
-
-        const res = remark()
-            .use(html)
-            .processSync(mdText).toString()
-
-        return <div dangerouslySetInnerHTML={{ __html: res }}></div>
-
-    }
-
 
     const EnterPress = (e: any) => {
         if (e.keyCode == 13 && e.shiftKey == false) {
@@ -55,29 +44,27 @@ export default function Chat() {
         }
     }
     return (
-        <div className="flex flex-col w-full max-w-md py-24 mx-auto stretch">
-            <div className='h-full w-full p-7 m-8 mb-32'>
-                {messages.map(m => (
-                    <div key={m.id} className="whitespace-pre-wrap bg-slate-300 p-4 m-4 rounded-lg z-0">
-                        <h1 className='font-bold text-rose-900'>{m.role === 'user' ? userName + ': ' : 'GPT: '}</h1>
-                        {/* <p>{m.content}</p> */}
-                        {convertMDtoHTML(m.content)}
+        <div className="flex flex-col h-[600px] rounded-lg border border-gray-200 dark:border-gray-800">
+            <div className="flex-1 overflow-auto p-6">
+                <div className="grid gap-4">
+                    <div>
+                        {messages.map(m => (
+                            <ChatBox key={m.id} msg={m.content} role={m.role} userName={userName} >
+
+                            </ChatBox>
+                        ))}
                     </div>
-                ))}
+
+                    <div className="border-t flex items-center p-4">
+                        <Input className="flex-1 min-w-0" onKeyDown={EnterPress} onChange={handleInputChange} placeholder="Type a message..." value={input} type="text" />
+                        <Button className="ml-4" type="submit" onClick={(e: any) => handleSubmit(e)}>
+                            Send
+                        </Button>
+                    </div>
+
+
+                </div>
             </div>
-
-
-            <form onSubmit={handleSubmit}>
-                <textarea
-                    className="z-50 fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl min-h-12"
-                    value={input}
-                    placeholder="let's chat..."
-                    onChange={handleInputChange}
-                    rows={5}
-                    onKeyDown={EnterPress}
-                />
-                <div className='fixed bottom-0 w-full bg-white z-30 h-28'></div>
-            </form>
         </div>
     );
 }
