@@ -35,8 +35,6 @@ export default function Chat() {
     const EnterPress = (e: any) => {
         if (e.keyCode == 13 && e.shiftKey == false) {
             e.preventDefault();
-            console.log('pressed enter');
-            console.log(input);
 
             if (input && input.trim() !== '') {
                 handleSubmit(e);

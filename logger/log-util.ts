@@ -1,14 +1,38 @@
-import logLevelData from "./log-level";
+
 import pino, { Logger } from "pino";
 
-const logLevels = new Map<string, string>(Object.entries(logLevelData));
 
-export function getLogLevel(logger: string): string {
-    return logLevels.get(logger) || logLevels.get("*") || "info";
-}
+const fileTransport = pino.transport({
+    targets: [
+        {
+            target: "pino/file",
+            level: 'error',
+            options: {
+                destination: `/log/gpt/error.log`
+            }
+        },
+        {
+            target: "pino/file",
+            level: 'info',
+            options: {
+                destination: `/log/gpt/info.log`
+            }
+        },
+        {
+            target: "pino/file",
+            level: 'debug',
+            options: {
+                destination: `/log/gpt/debug.log`
+            }
+        },
+    ],
 
-export function getLogger(name: string): Logger {
-    return pino({ name, level: getLogLevel(name) });
-}
+})
+
+const logger = pino(fileTransport)
+
+
+
+export default logger
 
 

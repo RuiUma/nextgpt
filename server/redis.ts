@@ -1,10 +1,9 @@
 'use server'
 import { createClient } from 'redis';
-import { getLogger } from '@/logger/log-util'
+import logger from '@/logger/log-util'
 import connectToRedis from '@/redis/connectToRedis'
 
 
-const logger = getLogger("Chat Server Backend");
 
 
 

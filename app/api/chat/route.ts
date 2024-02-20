@@ -1,7 +1,7 @@
 import OpenAI from 'openai'
 import { OpenAIStream, StreamingTextResponse } from 'ai'
 import { headers } from 'next/headers'
-import { getLogger } from '@/logger/log-util'
+import logger from '@/logger/log-util'
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -11,7 +11,6 @@ const openai = new OpenAI({
 
 const USER_EMAIL_ADDRESS_HEADER = 'Cf-Access-Authenticated-User-Email'
 const CF_JWT_HEADER = 'cf-access-jwt-assertion'
-const logger = getLogger("Chat Server Backend");
 
 export async function POST(req: Request) {
 

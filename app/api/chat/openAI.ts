@@ -14,9 +14,7 @@ export async function callOpenAI(inputString: string) {
         stream: true,
     });
 
-    // for await (const part of stream) {
-    //     console.log(part.choices[0]?.delta?.content || '');
-    // }
+
 
     return stream
 }

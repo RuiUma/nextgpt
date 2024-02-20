@@ -1,12 +1,11 @@
 import { headers } from 'next/headers'
-import { getLogger } from '@/logger/log-util'
+import logger from '@/logger/log-util'
 import { NextResponse } from 'next/server';
 
 
 
 const USER_EMAIL_ADDRESS_HEADER = 'Cf-Access-Authenticated-User-Email'
 const CF_JWT_HEADER = 'cf-access-jwt-assertion'
-const logger = getLogger("Chat Server Backend");
 
 
 
