@@ -1,10 +1,11 @@
 'use client';
-import { Input } from "@/components/ui/input"
+// import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import ChatBox from '@/components/component/chat-box';
 import { updateUserInfo } from '@/server/redis';
 import { useChat } from 'ai/react';
 import { useEffect, useState } from 'react';
+import { Textarea } from "@/components/ui/textarea";
 
 
 
@@ -56,7 +57,7 @@ export default function Chat() {
                     </div>
 
                     <div className="border-t flex items-center p-4">
-                        <Input className="flex-1 min-w-0" onKeyDown={EnterPress} onChange={handleInputChange} placeholder="Type a message..." value={input} type="text" />
+                        <Textarea className="flex-1 min-w-0" onKeyDown={EnterPress} onChange={handleInputChange} placeholder="Type a message..." value={input} />
                         <Button className="ml-4" type="submit" onClick={(e: any) => handleSubmit(e)}>
                             Send
                         </Button>
